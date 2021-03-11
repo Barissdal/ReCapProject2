@@ -21,7 +21,7 @@ namespace ConsoleUI
             {
                 BrandId = 1,
                 ColorId = 7,
-                DailyPrice = 0,
+                DailyPrice = 190,
                 Description = "Lancia Delta",
                 ModelYear = 2011
             });
