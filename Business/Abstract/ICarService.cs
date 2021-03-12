@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -13,6 +14,6 @@ namespace Business.Abstract
 
         List<Car> GetCarsByColorId(int colorId);
 
-        void Add(Car car);
+        List<CarDetailDto> GetCarDetails();
     }
 }
