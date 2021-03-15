@@ -33,6 +33,13 @@ namespace Business.Concrete
             }
         }
 
+        public IResult Delete(Car car)
+        {
+             _carDal.Delete(car);
+
+            return new SuccessResult(Messages.CarDeleted);
+        }
+
         public IDataResult<List<Car>> GetAll()
         {
             // İş kodları
@@ -74,5 +81,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        public IResult Update(Car car)
+        {
+            _carDal.Update(car);
+
+            return new SuccessResult(Messages.CarUpdated);
+        }
     }
 }

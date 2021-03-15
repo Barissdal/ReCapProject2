@@ -10,29 +10,49 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarTest();
 
             //BrandTest();
 
-            //carManager.Add(new Car()
-            //{
-            //    BrandId = 1,
-            //    ColorId = 7,
-            //    DailyPrice = 190,
-            //    Description = "Lancia Delta",
-            //    ModelYear = 2011
-            //});
-        }
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-        private static void BrandTest()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-            foreach (var brand in brandManager.GetAll())
+            var rentCar2 = rentalManager.Add(new Rental
             {
-                Console.WriteLine(brand.Name);
+                CarId = 5,
+                CustomerId = 1,
+                RentDate = new DateTime(2021, 04, 15),
+                //ReturnDate = new DateTime(2021, 04, 15)
             }
+            );
+            Console.WriteLine(rentCar2.Message);
+
+
+            var rentalResult = rentalManager.GetRentalDetails();
+
+            if (rentalResult.Success == true)
+            {
+                foreach (var rent in rentalResult.Data)
+                {
+                    Console.WriteLine($"{rent.CarName} - {rent.ColorName} - {rent.DailyPrice} - {rent.RentDate} - {rent.ReturnDate}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(rentalResult.Message);
+            }
+
+
         }
+
+        //private static void BrandTest()
+        //{
+        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+        //    foreach (var brand in brandManager.GetAll())
+        //    {
+        //        Console.WriteLine(brand.Name);
+        //    }
+        //}
 
         private static void CarTest()
         {
@@ -52,6 +72,17 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
+
+            //var carAddResult =carManager.Add(new Car()
+            //{
+            //    BrandId = 2,
+            //    ColorId = 8,
+            //    DailyPrice = 320,
+            //    Description = "Audi Q2",
+            //    ModelYear = 2019
+            //});
+
+            //Console.WriteLine(carAddResult.Message);
 
         }
     }
