@@ -53,7 +53,7 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            throw new NotImplementedException();
+            return new SuccessResult(Messages.RentalUpdated);
         }
         
 
