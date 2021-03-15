@@ -14,6 +14,12 @@ namespace ConsoleUI
 
             //BrandTest();
 
+            RentalTest();
+
+        }
+
+        private static void RentalTest()
+        {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
             var rentCar2 = rentalManager.Add(new Rental
@@ -40,19 +46,27 @@ namespace ConsoleUI
             {
                 Console.WriteLine(rentalResult.Message);
             }
-
-
         }
 
-        //private static void BrandTest()
-        //{
-        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-        //    foreach (var brand in brandManager.GetAll())
-        //    {
-        //        Console.WriteLine(brand.Name);
-        //    }
-        //}
+            var result = brandManager.GetAll();
+
+            if (result.Success == true)
+            {
+                foreach (var brand in result.Data)
+                {
+                    Console.WriteLine(result.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+        }
 
         private static void CarTest()
         {
