@@ -35,5 +35,11 @@ namespace Business.Constants
         public static string RentalDeleted = "Kiralama silindi.";
         public static string RentalListed = "Kiralamalar listelendi.";
         public static string RentalUpdated = "Kiralama güncellendi.";
+
+        internal static string ColorAdded = "Resim eklendi.";
+        internal static string ColorNameInValid = "Resim ismi geçersiz.";
+        internal static string ColorDeleted = "Resim silindi.";
+        internal static string ColorUpdated = "Resim güncellendi.";
+        internal static string ColorsListed = "Resimler listelendi.";
     }
 }
