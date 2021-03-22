@@ -6,6 +6,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,6 +27,12 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            IResult result = BusinessRules.Run(CeckIfCarCountOfBrandCorrect(car.BrandId));
+
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
            
@@ -42,16 +49,7 @@ namespace Business.Concrete
         {
             // İş kodları
 
-            if (DateTime.Now.Hour == 23)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
-            else
-            {
-                return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
-            }
-
-            
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
         public IDataResult<List<Car>> GetById(int carId)
@@ -84,6 +82,17 @@ namespace Business.Concrete
             _carDal.Update(car);
 
             return new SuccessResult(Messages.CarUpdated);
+        }
+
+        private IResult CeckIfCarCountOfBrandCorrect(int brandId)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
+
+            if (result >= 10)
+            {
+                return new ErrorResult(Messages.CarCountOfBrandError);
+            }
+            return new SuccessResult();
         }
     }
 }

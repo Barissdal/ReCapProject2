@@ -12,8 +12,8 @@ namespace Business.Constants
         public static string CarAdded = "Araba eklendi.";
         public static string CarNameInValid = "Araba ismi geçersiz.";
         public static string CarsListed = "Arabalar listelendi.";
-        internal static string CarDeleted = "Araba silindi.";
-        internal static string CarUpdated = "Araba güncellendi.";
+        public static string CarDeleted = "Araba silindi.";
+        public static string CarUpdated = "Araba güncellendi.";
 
         public static string BrandsListed = "Markalar listelendi.";
         public static string BrandAdded = "Marka eklendi.";
@@ -36,10 +36,11 @@ namespace Business.Constants
         public static string RentalListed = "Kiralamalar listelendi.";
         public static string RentalUpdated = "Kiralama güncellendi.";
 
-        internal static string ColorAdded = "Resim eklendi.";
-        internal static string ColorNameInValid = "Resim ismi geçersiz.";
-        internal static string ColorDeleted = "Resim silindi.";
-        internal static string ColorUpdated = "Resim güncellendi.";
-        internal static string ColorsListed = "Resimler listelendi.";
+        public static string ColorAdded = "Resim eklendi.";
+        public static string ColorNameInValid = "Resim ismi geçersiz.";
+        public static string ColorDeleted = "Resim silindi.";
+        public static string ColorUpdated = "Resim güncellendi.";
+        public static string ColorsListed = "Resimler listelendi.";
+        public static string CarCountOfBrandError = "Bir markada 10'dan fazla araba olamaz.";
     }
 }
