@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using Entities.Concrete;
 
@@ -47,5 +48,7 @@ namespace Business.Constants
         public static string CarImageLimitExceded = "Her arabanın en fazla 5 adet resmi olabilir.";
         public static string CarImageDeleted = "Araba resmi silindi.";
         public static string CarImageLimitExceeded = "Her arabanın en fazla 5 adet resmi olabilir.";
+
+        public static string AuthorizationDenied = "Yetkiniz yok";
     }
 }
