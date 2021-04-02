@@ -58,6 +58,7 @@ namespace Business.Concrete
             return null;
         }
 
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
@@ -66,7 +67,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
-        [CacheAspect]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAll()
         {
             // İş kodları
@@ -101,6 +102,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        [SecuredOperation("admin")]
+        [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {

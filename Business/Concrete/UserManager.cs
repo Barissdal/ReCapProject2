@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
 
@@ -21,10 +25,14 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
+        [SecuredOperation("admin")]
+        [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public void Add(User user)
         {
             _userDal.Add(user);
         }
+
 
         public User GetByMail(string email)
         {
