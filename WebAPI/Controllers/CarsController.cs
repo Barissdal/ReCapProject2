@@ -7,6 +7,7 @@ using Entities.Concrete;
 using DataAccess.Concrete.EntityFrameWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -29,7 +30,7 @@ namespace WebAPI.Controllers
 
             if (result.Success == true)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -66,9 +67,11 @@ namespace WebAPI.Controllers
         {
             var result = _carService.GetCarDetails();
 
+            Thread.Sleep(5000);
+
             if (result.Success == true)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
