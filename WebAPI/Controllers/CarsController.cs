@@ -37,13 +37,13 @@ namespace WebAPI.Controllers
 
         [HttpGet("getcarsbybrandid")]
 
-        public IActionResult GetCarsByBrandId(int id)
+        public IActionResult GetCarsByBrandId(int brandId)
         {
-            var result = _carService.GetCarsByBrandId(id);
+            var result = _carService.GetCarsByBrandId(brandId);
 
             if (result.Success == true)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
         {
             var result = _carService.GetCarDetails();
 
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
 
             if (result.Success == true)
             {

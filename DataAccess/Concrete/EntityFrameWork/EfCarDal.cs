@@ -29,7 +29,9 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
                                  ColorName = col.Name,
-                                 ModelYear = c.ModelYear
+                                 ModelYear = c.ModelYear,
+                                 BrandId = b.Id,
+                                 ColorId = col.Id
                              };
 
                 return result.ToList();

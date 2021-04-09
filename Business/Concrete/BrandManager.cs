@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
@@ -47,7 +48,7 @@ namespace Business.Concrete
             }
             else
             {
-                return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
+                return new SuccessDataResult<List<Brand>>(_brandDal.GetAll().ToList());
             }
         }
 
