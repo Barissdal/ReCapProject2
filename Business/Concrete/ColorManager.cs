@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
@@ -42,13 +43,13 @@ namespace Business.Concrete
         [CacheAspect(duration: 10)]
         public IDataResult<List<Color>> GetAll()
         {
-            if (DateTime.Now.Hour == 23)
+            if (DateTime.Now.Hour == 25)
             {
                 return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
             }
             else
             {
-                return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorsListed);
+                return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList());
             }
         }
 
