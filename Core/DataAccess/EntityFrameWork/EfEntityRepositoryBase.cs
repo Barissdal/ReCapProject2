@@ -45,9 +45,8 @@ namespace Core.DataAccess.EntityFrameWork
             using (TContext context = new TContext())
             {
                 //burada sql çalıştırır
-                return filter == null
-                    ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
+                return filter == null ? context.Set<TEntity>().ToList() :
+                    context.Set<TEntity>().Where(filter).ToList();
             }
         }
 

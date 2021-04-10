@@ -5,21 +5,17 @@
   <thead>
     <tr>
       <th>Araba:</th>
-      <th>Araba Id:</th>
-      <th>Marka Id:</th>
-      <th>Renk Id:</th>
       <th>Model Yılı:</th>
       <th>Günlük Kiralama Ücreti:</th>
+      <th> </th>
     </tr>
   </thead>
   <tr *ngFor="let car of cars"
       (click)="setCurrentCar(car)"
       routerLink ="/cars/cardetail/{{car.id}}">
     <td>{{car.description}}</td>
-    <td>{{car.id}}</td>
-    <td>{{car.brandId}}</td>
-    <td>{{car.colorId}}</td>
     <td>{{car.modelYear}}</td>
     <td>{{car.dailyPrice}}</td>
+    <a class="car-btn" routerLink="/cars/cardetail/{{car.id}}" >Detaylar..</a>
   </tr>
 </table>

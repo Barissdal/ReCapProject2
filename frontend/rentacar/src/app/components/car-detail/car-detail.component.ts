@@ -12,6 +12,8 @@ export class CarDetailComponent implements OnInit {
 
   carDetails:CarDetail[]=[];
   currentCarDetails:CarDetail;
+  imageBasePath: string = 'https://localhost:44340';
+
   constructor(private carDetailService:CarDetailService,
     private activatedRoute:ActivatedRoute) { }
 
@@ -19,6 +21,8 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params["id"]) {
         this.getCarsByCar(params["id"])
+      }else {
+        this.getCarDetails()
       }
     })
   }

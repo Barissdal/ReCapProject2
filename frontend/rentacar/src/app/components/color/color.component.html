@@ -1,12 +1,15 @@
-<ul class="list-group">
-  <li
-    (click)="setCurrentColor(color)"
-    routerLink = "/cars/color/{{color.id}}"
-    *ngFor="let color of colors"
-    [class]="getCurrentColorClass(color)"
-  >
-    {{ color.name }}
-  </li>
-</ul>
-
-<h5 *ngIf="currentColor">{{ currentColor.name }} seçtiniz</h5>
+<li class="leftmenu-list">
+  <a href="javascript:void(0)">Renkler <i class="fas fa-minus"></i></a>
+  <div class="colors-submenu">
+    <ul>
+      <li
+        (click)="setCurrentColor(color)"
+        [class]="getCurrentColorClass(color)"
+        *ngFor="let color of colors"
+        routerLink="/cars/color/{{ color.id }}"
+      >
+        <span>{{ color.name }}</span>
+      </li>
+    </ul>
+  </div>
+</li>

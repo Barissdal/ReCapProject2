@@ -14,11 +14,15 @@ namespace Core.Utilities.Helpers
             var result = newPath(file);
             try
             {
-                var sourcePath = Path.GetTempFileName();
+                var sourcepath = Path.GetTempFileName();
                 if (file.Length > 0)
-                    using (var stream = new FileStream(sourcePath, FileMode.Create))
+                {
+                    using (var stream = new FileStream(sourcepath, FileMode.Create))
+                    {
                         file.CopyTo(stream);
-                File.Move(sourcePath, result.newPath);
+                    }
+                }
+                File.Move(sourcepath, result.newPath);
             }
             catch (Exception exception)
             {
@@ -30,6 +34,7 @@ namespace Core.Utilities.Helpers
         public static string Update(string sourcePath, IFormFile file)
         {
             var result = newPath(file);
+
             try
             {
                 if (sourcePath.Length > 0)
@@ -41,9 +46,9 @@ namespace Core.Utilities.Helpers
                 }
                 File.Delete(sourcePath);
             }
-            catch (Exception exception)
+            catch (Exception excepiton)
             {
-                return exception.Message;
+                return excepiton.Message;
             }
             return result.Path2;
         }
@@ -67,14 +72,19 @@ namespace Core.Utilities.Helpers
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
 
-            var newPath = Guid.NewGuid() + fileExtension;
+            var creatingUniqueFilename = Guid.NewGuid().ToString("N") +
+                "_" + DateTime.Now.Month +
+                "_" + DateTime.Now.Day +
+                "_" + DateTime.Now.Year + fileExtension;
 
 
-            string path = Environment.CurrentDirectory + @"\wwwroot\uploads";
+            string path = Environment.CurrentDirectory + @"\wwwroot\Images";
 
-            string result = $@"{path}\{newPath}";
+            string result = $@"{path}\{creatingUniqueFilename}";
 
-            return (result, $"\\uploads\\{newPath}");
+            return (result, $"\\Images\\{creatingUniqueFilename}");
+
+
         }
     }
 }

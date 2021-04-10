@@ -9,7 +9,7 @@ import { Color } from '../models/color';
 })
 export class ColorService {
 
-  apiUrl = 'https://localhost:44351/api/colors/getall'
+  apiUrl = 'https://localhost:44340/api/colors/getall'
 
   constructor(private httpClient: HttpClient) { }
 

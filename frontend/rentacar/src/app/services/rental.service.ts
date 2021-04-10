@@ -10,7 +10,7 @@ import { Rental } from '../models/rental';
 })
 export class RentalService {
 
-  apiUrl = 'https://localhost:44351/api/rentals/getall'
+  apiUrl = 'https://localhost:44340/api/rentals/getall'
 
   constructor(private httpClient: HttpClient) { }
 

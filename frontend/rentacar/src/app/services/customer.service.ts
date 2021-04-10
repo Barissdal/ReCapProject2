@@ -10,7 +10,7 @@ import { Customer } from '../models/customer';
 })
 export class CustomerService {
 
-  apiUrl = 'https://localhost:44351/api/customers/getall'
+  apiUrl = 'https://localhost:44340/api/customers/getall'
 
   constructor(private httpClient: HttpClient) { }
 

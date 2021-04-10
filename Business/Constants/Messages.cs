@@ -58,5 +58,15 @@ namespace Business.Constants
 
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string LoginSuccess = "Login başarılı.";
+
+        public static string FailedToUploadImage = "Failed to upload file.";
+        public static string FailedToDeleteImage = "Failed to delete image.";
+        public static string FailedCarImageAdd = "Araba Resmi Eklenemedi";
+        public static string DeletedCarImage = "Araba Resmi Silindi";
+        internal static string CarImageLimited;
+        internal static string Deleted;
+        internal static string Added;
+        internal static string Updated;
+        internal static string Listed;
     }
 }
