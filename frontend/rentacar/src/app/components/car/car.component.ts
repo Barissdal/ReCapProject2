@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
+import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
+import { CarImageService } from 'src/app/services/carimage.service';
 
 
 @Component({
@@ -11,45 +13,57 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarComponent implements OnInit {
   cars:Car[]=[];
-  currentCar: Car;
-  dataLoaded = false;
+  currentCar:Car;
+  carId: number;
+  images:CarImage[]=[];
+  dataLoaded=false;
+  imageUrl:string="https://localhost:44340/"
 
-  constructor(private carService:CarService,private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService,
+    private carImageService:CarImageService,
+    private activatedRoute:ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if(params["brandId"]) {
-        this.getCarsByBrand(params["brandId"])
-      }
-      else if(params["colorId"]){
-        this.getCarsByColor(params["colorId"])
-      }
-      else{
-        this.getCars()
-      }
-    })
-  }
+    ngOnInit(): void {
+      this.activatedRoute.params.subscribe(params=>{
+        if(params["brandId"]){
+          this.getCarsByBrand(params["brandId"])
+        }else if(params["carId"]){
+          this.getCarImagesByCarId(params["carId"])
+          this.dataLoaded=true;
 
-  getCars() {
-    this.carService.getCars().subscribe(response=> {
-      this.cars=response.data
-      this.dataLoaded=true;
-    })
-  }
+        }else{
+          this.getCars()
+        }
+      })
+    }
 
-  getCarsByBrand(brandId:number) {
-    this.carService.getCarsByBrand(brandId).subscribe(response=> {
-      this.cars=response.data
-      this.dataLoaded=true;
-    })
-  }
+    getCars(){
+      this.carService.getCars().subscribe(response=>{
+        this.cars = response.data
+        this.dataLoaded=true;
+      })
+    }
 
-  getCarsByColor(colorId:number) {
-    this.carService.getCarsByColor(colorId).subscribe(response=> {
-      this.cars=response.data
-      this.dataLoaded=true;
-    })
-  }
+    getCarsByBrand(brandId:number){
+      this.carService.getCarsByBrand(brandId).subscribe(response=>{
+        this.cars = response.data
+        this.dataLoaded=true;
+      })
+    }
+    getCarsByColor(colorId:number){
+      this.carService.getCarsByBrand(colorId).subscribe(response=>{
+        this.cars = response.data
+        this.dataLoaded=true;
+      })
+
+    }
+
+    getCarImagesByCarId(carId:number){
+      this.carImageService.getCarImagesByCarId(carId).subscribe(response=>{
+       this.images=response.data;
+       console.log(response);
+      })
+    }
 
   setCurrentCar(car:Car) {
     this.currentCar=car
@@ -72,6 +86,5 @@ export class CarComponent implements OnInit {
       return "list-group-item"
     }
   }
-
 
 }

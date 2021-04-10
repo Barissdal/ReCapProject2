@@ -21,8 +21,6 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params["id"]) {
         this.getCarsByCar(params["id"])
-      }else {
-        this.getCarDetails()
       }
     })
   }

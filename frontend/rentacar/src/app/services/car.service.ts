@@ -14,7 +14,7 @@ export class CarService {
   constructor(private httpClient: HttpClient) { }
 
   getCars():Observable<ListResponseModel<Car>> {
-    let newPath = this.apiUrl + "cars/getall"
+    let newPath = this.apiUrl + "cars/getcardetails"
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
@@ -28,8 +28,13 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
-  // getCarByColor(colorId:number):Observable<ListResponseModel<Car>>{
-  //   let newPath=this.apiUrl+"recaps/getcarsbycolorid?colorId="+colorId;
-  //   return this.httpClient.get<ListResponseModel<Car>>(newPath);
-  // }
+  getCarsDetail(carId:number): Observable<ListResponseModel<Car>> {
+    let newPath = this.apiUrl + "car/getcardetailbyid?carId=" + carId
+    return this.httpClient.get<ListResponseModel<Car>>(newPath);
+}
+
+//   getByCarIdImage(carId : number) : Observable<ListResponseModel<Car>>{
+//   let newPath = this.apiUrl + + "carImages/getimagesbycarid?carId=" + carId;
+//   return this.httpClient.get<ListResponseModel<Car>>(newPath);
+// }
 }

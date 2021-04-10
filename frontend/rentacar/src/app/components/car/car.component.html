@@ -1,4 +1,4 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+<!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 <table class="table">
@@ -18,4 +18,30 @@
     <td>{{car.dailyPrice}}</td>
     <a class="car-btn" routerLink="/cars/cardetail/{{car.id}}" >Detaylar..</a>
   </tr>
-</table>
+</table> -->
+
+<div class="carousel-inner">
+  <div *ngFor="let image of images">
+    <img src="{{ imageUrl }}{{ image.imagePath }}" class="d-block w-100" width="800" height="400" alt="..." />
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars "  >
+    <div  class="card" style="width: 100%;">
+        <img  src="https://localhost:44340/{{car.imagePath}}" class="card-img-top" alt="Araba Resmi">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{car.description | uppercase}}</h5>
+          <hr>
+          <p> <b>Marka :</b> {{car.brandName }} </p>
+          <hr>
+          <p> <b>Model Yılı :</b> {{car.modelYear}} </p>
+          <hr>
+          <p> <b class="pull-left">Günlük Fiyatı :</b> {{car.dailyPrice|currency: "TRY":""}} ₺</p>
+          <hr>
+          <p> <b>Renk :</b> {{car.colorName}} </p>
+          <hr>
+          <a routerLink="/cars/cardetail/{{car.id}}" class="btn btn-md btn-secondary btn-outline-white mt-2">Detay</a>
+        </div>
+      </div>
+    </div>
+  </div>
