@@ -20,19 +20,18 @@
   </tr>
 </table> -->
 
-<div class="carousel-inner">
+<!-- <div class="carousel-inner">
   <div *ngFor="let image of images">
     <img src="{{imageUrl}}{{image.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars "  >
     <div  class="card" style="width: 100%;">
-        <img  src="{{imageUrl}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi">
+        <img  src="{{imageUrl}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi"
+        width="50" height="200">
         <div class="card-body">
           <h5 class="card-title text-center">{{car.description | uppercase}}</h5>
-          <hr>
-          <p> <b>ImagePath :</b> {{imageUrl}}{{car.imagePath}} </p>
           <hr>
           <p> <b>Marka :</b> {{car.brandName }} </p>
           <hr>
