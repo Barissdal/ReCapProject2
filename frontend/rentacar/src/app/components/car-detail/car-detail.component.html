@@ -1,12 +1,12 @@
-<div
+<!-- <div
   class="spinner-border text-primary"
   role="status"
 >
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<div class="row" *ngFor="let carDetail of carDetails">
-    <img src="{{imageBasePath}}{{carDetail.imagePath}}" class="card-img-top" alt="thumbnail" width="100" height="330">
+<div class="row" *ngFor="let car of cars">
+    <img src="{{imageBasePath}}{{car.imagePath}}" class="card-img-top" alt="thumbnail" width="100" height="330">
     <table class="table table-bordered table-responsive table-hover table-dark" style="margin-top: 2%;">
         <thead>
             <tr>
@@ -20,12 +20,36 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{carDetail.description}}</td>
-                <td>{{carDetail.brandName}}</td>
-                <td>{{carDetail.colorName}}</td>
-                <td>{{carDetail.dailyPrice}}</td>
-                <td>{{carDetail.modelYear}}</td>
+                <td>{{car.description}}</td>
+                <td>{{car.brandName}}</td>
+                <td>{{car.colorName}}</td>
+                <td>{{car.dailyPrice}}</td>
+                <td>{{car.modelYear}}</td>
             </tr>
         </tbody>
     </table>
-</div>
+</div> -->
+
+
+<div class="row">
+  <div class="d-block w-100" *ngFor="let carDetail of carDetails "  >
+    <div  class="card" style="width: 100%;">
+        <img src="{{imageUrl}}{{carDetail.imagePath}}" class="card-img-top" alt="Araba Resmi"
+        width="800" height="400">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{carDetail.description | uppercase}}</h5>
+          <hr>
+          <p> <b>Marka :</b> {{carDetail.brandName }} </p>
+          <hr>
+          <p> <b>Model Yılı :</b> {{carDetail.modelYear}} </p>
+          <hr>
+          <p> <b class="pull-left">Günlük Fiyatı :</b> {{carDetail.dailyPrice|currency: "TRY":""}} ₺</p>
+          <hr>
+          <p> <b>Renk :</b> {{carDetail.colorName}} </p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

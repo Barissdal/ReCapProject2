@@ -17,6 +17,7 @@ export class CarComponent implements OnInit {
   carId: number;
   images:CarImage[]=[];
   dataLoaded=false;
+
   imageUrl:string="https://localhost:44340"
 
   constructor(private carService:CarService,
@@ -26,10 +27,12 @@ export class CarComponent implements OnInit {
     ngOnInit(): void {
       this.activatedRoute.params.subscribe(params=>{
         if(params["brandId"]){
-          this.getCarsByBrand(params["brandId"]);
+          this.getCarsDetailByBrand(params["brandId"]);
         }else if(params["colorId"]){
-          this.getCarsByColor(params["colorId"]);
-       }else{
+          this.getCarsDetailByColor(params["colorId"]);
+       }else if(params["carId"]){
+        this.getCarsDetail(params["carId"]);
+     }else{
         this.getCars();
       }
       })
@@ -46,14 +49,41 @@ export class CarComponent implements OnInit {
       this.carService.getCarsByBrand(brandId).subscribe(response=>{
         this.cars = response.data
         this.dataLoaded=true;
+        console.log(this.cars);
       })
     }
     getCarsByColor(colorId:number){
       this.carService.getCarsByBrand(colorId).subscribe(response=>{
         this.cars = response.data
         this.dataLoaded=true;
+
       })
 
+    }
+
+    getCarsDetail(carId:number){
+      this.carService.getCarsDetail(carId).subscribe(response=>{
+        this.cars = response.data
+        console.log(response);
+        this.dataLoaded=true;
+        //this.carId = carId;
+      })
+    }
+
+    getCarsDetailByBrand(brandId:number){
+      this.carService.getCarsDetailByBrand(brandId).subscribe(response=>{
+        this.cars = response.data
+        console.log(response);
+        this.dataLoaded=true;
+      })
+    }
+
+    getCarsDetailByColor(colorId:number){
+      this.carService.getCarsDetailByColor(colorId).subscribe(response=>{
+        this.cars = response.data
+        console.log(response);
+        this.dataLoaded=true;
+      })
     }
 
     getCarImagesByCarId(carId:number){
@@ -65,6 +95,7 @@ export class CarComponent implements OnInit {
 
   setCurrentCar(car:Car) {
     this.currentCar=car
+    console.log(car);
   }
 
   getCurrentCarClass(car:Car){
