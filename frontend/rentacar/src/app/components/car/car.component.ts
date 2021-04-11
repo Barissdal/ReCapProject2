@@ -43,7 +43,7 @@ export class CarComponent implements OnInit {
       this.carService.getCars().subscribe(response=>{
         //this.cars = response.data
         //car nesnemi dto'dan getirdiğim için bir arabama ait birden fazla resim olduğunda ana sayfamda bir tanesini getirsin.
-        this.distinctCars = response.data.filter(
+        this.cars = response.data.filter(
           (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
         )
         //this.currentCar=response.data[0]
@@ -53,14 +53,18 @@ export class CarComponent implements OnInit {
 
     getCarsByBrand(brandId:number){
       this.carService.getCarsByBrand(brandId).subscribe(response=>{
-        this.cars = response.data
+        this.cars = response.data.filter(
+          (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+        )
         this.dataLoaded=true;
         console.log(this.cars);
       })
     }
     getCarsByColor(colorId:number){
       this.carService.getCarsByBrand(colorId).subscribe(response=>{
-        this.cars = response.data
+        this.cars = response.data.filter(
+          (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+        )
         this.dataLoaded=true;
 
       })
@@ -78,7 +82,9 @@ export class CarComponent implements OnInit {
 
     getCarsDetailByBrand(brandId:number){
       this.carService.getCarsDetailByBrand(brandId).subscribe(response=>{
-        this.cars = response.data
+        this.cars = response.data.filter(
+          (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+        )
         console.log(response);
         this.dataLoaded=true;
       })
@@ -86,7 +92,9 @@ export class CarComponent implements OnInit {
 
     getCarsDetailByColor(colorId:number){
       this.carService.getCarsDetailByColor(colorId).subscribe(response=>{
-        this.cars = response.data
+        this.cars = response.data.filter(
+          (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+        )
         console.log(response);
         this.dataLoaded=true;
       })
