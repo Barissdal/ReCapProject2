@@ -26,7 +26,7 @@
   </div>
 </div> -->
 <div class="row">
-  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars "  >
+  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of distinctCars"  >
     <div  class="card" style="width: 100%;">
         <img src="{{imageUrl}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi"
         width="50" height="200">

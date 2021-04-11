@@ -31,9 +31,13 @@
 </div> -->
 
 
-<div class="row">
-  <div class="d-block w-100" *ngFor="let carDetail of carDetails "  >
+<div class="card">
+  <div class="d-block w-100" *ngFor="let carDetail of carDetails; let i = index" [ngClass]="getSliderClassName(i)"  >
     <div  class="card" style="width: 100%;">
+      <!-- <marquee behavior="scroll" direction="left">
+        <img src="{{imageUrl}}{{carDetail.imagePath}}" class="card-img-top" alt="Araba Resmi"
+        width="800" height="400">
+        </marquee> -->
         <img src="{{imageUrl}}{{carDetail.imagePath}}" class="card-img-top" alt="Araba Resmi"
         width="800" height="400">
         <div class="card-body">
@@ -51,5 +55,4 @@
       </div>
     </div>
   </div>
-
 

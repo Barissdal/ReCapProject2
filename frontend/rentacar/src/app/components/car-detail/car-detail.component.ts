@@ -57,4 +57,16 @@ export class CarDetailComponent implements OnInit {
     })
   }
 
+  getSliderClassName(index:Number){
+    if(index == 0){
+      return "carousel-item active";
+    } else {
+      return "carousel-item";
+    }
+  }
+
+  getBack(){
+    this.carDetailService.getCarDetails();
+  }
+
 }

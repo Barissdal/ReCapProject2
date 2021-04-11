@@ -14,6 +14,7 @@ import { CarImageService } from 'src/app/services/carimage.service';
 export class CarComponent implements OnInit {
   cars:Car[]=[];
   currentCar:Car;
+  distinctCars:Car[]=[];
   carId: number;
   images:CarImage[]=[];
   dataLoaded=false;
@@ -40,7 +41,12 @@ export class CarComponent implements OnInit {
 
     getCars(){
       this.carService.getCars().subscribe(response=>{
-        this.cars = response.data
+        //this.cars = response.data
+        //car nesnemi dto'dan getirdiğim için bir arabama ait birden fazla resim olduğunda ana sayfamda bir tanesini getirsin.
+        this.distinctCars = response.data.filter(
+          (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+        )
+        //this.currentCar=response.data[0]
         this.dataLoaded=true;
       })
     }
