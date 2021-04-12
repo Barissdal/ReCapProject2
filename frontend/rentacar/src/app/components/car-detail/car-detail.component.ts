@@ -25,10 +25,11 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params["carId"]) {
         this.getCarsByCar(params["carId"])
+        this.getCarImagesByCarId(params["carId"])
       }
-      // else{
-      //   this.getCarDetails()
-      // }
+      else{
+        this.getCarDetails()
+      }
     })
   }
 
@@ -53,7 +54,7 @@ export class CarDetailComponent implements OnInit {
   getCarImagesByCarId(carId:number){
     this.carImageService.getCarImagesByCarId(carId).subscribe(response=>{
      this.images=response.data;
-     console.log(response);
+     console.log(this.images);
     })
   }
 

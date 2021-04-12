@@ -30,29 +30,54 @@
     </table>
 </div> -->
 
-
-<div class="card">
-  <div class="d-block w-100" *ngFor="let carDetail of carDetails; let i = index" [ngClass]="getSliderClassName(i)"  >
-    <div  class="card" style="width: 100%;">
       <!-- <marquee behavior="scroll" direction="left">
         <img src="{{imageUrl}}{{carDetail.imagePath}}" class="card-img-top" alt="Araba Resmi"
         width="800" height="400">
         </marquee> -->
-        <img src="{{imageUrl}}{{carDetail.imagePath}}" class="card-img-top" alt="Araba Resmi"
-        width="800" height="400">
+
+
+<!-- <div class="card">
+  <div class="d-block w-100" *ngFor="let image of images; let i = index" [ngClass]="getSliderClassName(i)"  >
+    <div  class="card" style="width: 100%;">
+        <img src="{{imageUrl}}{{image.imagePath}}" class="card-img-top" alt="Araba Resmi"
+        width="800" height="400" >
         <div class="card-body">
-          <h5 class="card-title text-center">{{carDetail.description | uppercase}}</h5>
+          <h5 class="card-title text-center">{{currentCarDetails.description | uppercase}}</h5>
           <hr>
-          <p> <b>Marka :</b> {{carDetail.brandName }} </p>
+          <p> <b>Marka :</b> {{currentCarDetails.brandName }} </p>
           <hr>
-          <p> <b>Model Yılı :</b> {{carDetail.modelYear}} </p>
+          <p> <b>Model Yılı :</b> {{currentCarDetails.modelYear}} </p>
           <hr>
-          <p> <b class="pull-left">Günlük Fiyatı :</b> {{carDetail.dailyPrice|currency: "TRY":""}} ₺</p>
+          <p> <b class="pull-left">Günlük Fiyatı :</b> {{currentCarDetails.dailyPrice|currency: "TRY":""}} ₺</p>
           <hr>
-          <p> <b>Renk :</b> {{carDetail.colorName}} </p>
+          <p> <b>Renk :</b> {{currentCarDetails.colorName}} </p>
           <hr>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
+  <div class="card">
+    <div class="d-block w-100" *ngFor="let image of images;"
+     >
+      <div  class="card" style="width: 100%;">
+          <img src="{{imageUrl}}{{image.imagePath}}" class="card-img-top" alt="Araba Resmi"
+          width="800" height="400">
+        </div>
+
+      </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">{{currentCarDetails.description | uppercase}}</h5>
+            <hr>
+            <p> <b>Marka :</b> {{currentCarDetails.brandName }} </p>
+            <hr>
+            <p> <b>Model Yılı :</b> {{currentCarDetails.modelYear}} </p>
+            <hr>
+            <p> <b class="pull-left">Günlük Fiyatı :</b> {{currentCarDetails.dailyPrice|currency: "TRY":""}} ₺</p>
+            <hr>
+            <p> <b>Renk :</b> {{currentCarDetails.colorName}} </p>
+            <hr>
+          </div>
+    </div>
 
