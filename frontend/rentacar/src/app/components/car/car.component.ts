@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
@@ -18,12 +19,14 @@ export class CarComponent implements OnInit {
   carId: number;
   images:CarImage[]=[];
   dataLoaded=false;
+  filterText:string="";
 
   imageUrl:string="https://localhost:44340"
 
   constructor(private carService:CarService,
     private carImageService:CarImageService,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private toastrService:ToastrService) { }
 
     ngOnInit(): void {
       this.activatedRoute.params.subscribe(params=>{
@@ -128,6 +131,10 @@ export class CarComponent implements OnInit {
     else{
       return "list-group-item"
     }
+  }
+
+  addToCart(car:Car) {
+    this.toastrService.success("Sepete eklendi",car.description)
   }
 
 }

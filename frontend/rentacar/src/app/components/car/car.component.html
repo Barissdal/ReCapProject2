@@ -26,7 +26,14 @@
   </div>
 </div> -->
 <div class="row">
-  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars"  >
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Araba ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz">
+  </div>
+  <div *ngIf="filterText" class ="alert alert-success">
+    {{filterText}} aradınız
+  </div>
+  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars  | filterPipe:filterText "  >
     <div  class="card" style="width: 100%;">
         <img src="{{imageUrl}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi"
         width="50" height="200">
@@ -44,6 +51,9 @@
           <!-- <hr>
           <p> <b>Renk :</b> {{car.colorName}} </p> -->
           <hr>
+          <p> <b class="pull-left">Günlük Kdv Dahil Fiyatı :</b> {{car.dailyPrice| vatAdded:18 |currency: "TRY":""}} ₺</p>
+          <hr>
+          <p><button (click)="addToCart(car)" type="button" class="btn btn-success"> Araç Kirala</button></p>
         </div>
       </div>
     </div>
