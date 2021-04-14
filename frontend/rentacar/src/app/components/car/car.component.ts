@@ -19,7 +19,7 @@ export class CarComponent implements OnInit {
   carId: number;
   images:CarImage[]=[];
   dataLoaded=false;
-  filterText:string="";
+  filterText!:string;
 
   imageUrl:string="https://localhost:44340"
 

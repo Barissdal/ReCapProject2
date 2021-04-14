@@ -16,7 +16,9 @@ import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 import{ToastrModule} from "ngx-toastr"
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrandPipePipe } from './pipes/brand-pipe.pipe';
+import { ColorPipePipe } from './pipes/color-pipe.pipe'
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
     NaviComponent,
     CarDetailComponent,
     VatAddedPipe,
-    FilterPipePipe
+    FilterPipePipe,
+    BrandPipePipe,
+    ColorPipePipe
   ],
   imports: [
     BrowserModule,
