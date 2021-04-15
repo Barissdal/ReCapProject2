@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { CarImageService } from 'src/app/services/carimage.service';
+import { ColorService } from 'src/app/services/color.service';
 
 
 @Component({
@@ -21,16 +25,27 @@ export class CarComponent implements OnInit {
   dataLoaded=false;
   filterText!:string;
 
+  colors:Color[]=[];
+  brands:Brand[]=[];
+
+  brandFilter: Number;
+  colorFilter: Number;
+
   imageUrl:string="https://localhost:44340"
 
   constructor(private carService:CarService,
     private carImageService:CarImageService,
     private activatedRoute:ActivatedRoute,
+    private colorService:ColorService,
+    private brandService:BrandService,
     private toastrService:ToastrService) { }
 
     ngOnInit(): void {
       this.activatedRoute.params.subscribe(params=>{
-        if(params["brandId"]){
+        if(params["colorId"] && params["brandId"]){
+          this.getCarsByColorAndBrand(params["colorId"],params["brandId"])
+        }
+        else if(params["brandId"]){
           this.getCarsDetailByBrand(params["brandId"]);
         }else if(params["colorId"]){
           this.getCarsDetailByColor(params["colorId"]);
@@ -40,6 +55,8 @@ export class CarComponent implements OnInit {
         this.getCars();
       }
       })
+      this.getColors();
+      this.getBrands();
     }
 
     getCars(){
@@ -53,6 +70,23 @@ export class CarComponent implements OnInit {
         this.dataLoaded=true;
       })
     }
+
+    getColors() {
+      this.colorService.getColors().subscribe(response=>
+        {
+          this.colors=response.data;
+
+        })
+      }
+      getBrands() {
+        this.brandService.getBrands().subscribe(response=>
+          {
+            this.brands=response.data;
+
+          })
+        }
+
+
 
     getCarsByBrand(brandId:number){
       this.carService.getCarsByBrand(brandId).subscribe(response=>{
@@ -110,6 +144,25 @@ export class CarComponent implements OnInit {
       })
     }
 
+
+    getCarsByColorAndBrand(colorId:number, brandId:number){
+
+        this.carService.getCarsByColorAndBrand(colorId,brandId).subscribe(response=>{
+          this.cars = response.data
+          this.cars = response.data.filter(
+            (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+          )
+          this.dataLoaded=true;
+
+          if(this.cars.length >0 ) {
+            this.toastrService.success("Filtreleme gerçekleşti.")
+          } else {this.toastrService.error("Seçilen kriterlere göre sistemde araba yok.")}
+
+          console.log(response);
+          })
+
+    }
+
   setCurrentCar(car:Car) {
     this.currentCar=car
     console.log(car);
@@ -135,6 +188,19 @@ export class CarComponent implements OnInit {
 
   addToCart(car:Car) {
     this.toastrService.success("Sepete eklendi",car.description)
+  }
+
+  getSelectedBrand(brandId: Number) {
+    if (this.brandFilter == brandId)
+      return true;
+    else
+      return false;
+  }
+  getSelectedColor(colorId: Number) {
+    if (this.colorFilter == colorId)
+      return true;
+    else
+      return false;
   }
 
 }

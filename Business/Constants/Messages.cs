@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Constants
 {
@@ -63,10 +64,12 @@ namespace Business.Constants
         public static string FailedToDeleteImage = "Failed to delete image.";
         public static string FailedCarImageAdd = "Araba Resmi Eklenemedi";
         public static string DeletedCarImage = "Araba Resmi Silindi";
-        internal static string CarImageLimited;
-        internal static string Deleted;
-        internal static string Added;
-        internal static string Updated;
-        internal static string Listed;
+        public static string CarImageLimited;
+        public static string Deleted;
+        public static string Added;
+        public static string Updated;
+        public static string Listed;
+
+        public static string DataNotLoaded ="Girilen kriterlere uygun araba yok.";
     }
 }

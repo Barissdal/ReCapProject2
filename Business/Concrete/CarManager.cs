@@ -76,6 +76,19 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll().ToList());
         }
 
+        public IDataResult<List<CarDetailDto>> GetByColorAndBrandId(int colorId, int brandId)
+        {
+            //var result = _carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId);
+
+            //if (result.Count == 0)
+            //{
+            //    return new ErrorDataResult<List<CarDetailDto>>(Messages.DataNotLoaded);
+            //}
+
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId && c.BrandId == brandId));
+
+        }
+
         [CacheAspect(duration: 10)]
         [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetById(int carId)

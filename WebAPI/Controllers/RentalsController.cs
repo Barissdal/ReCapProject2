@@ -44,6 +44,18 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
+        [HttpGet("getrentaldetailsbycar")]
+        public IActionResult GetRentalDetailsByCar(int carId)
+        {
+            var result = _rentalService.GetRentalDetailsByCar(carId);
+
+            if (result.Success == true)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+
         [HttpPost("add")]
 
         public IActionResult Add(Rental rental)
@@ -81,6 +93,13 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("getcarcontrol")]
+        public IActionResult GetCarControl(int carId)
+        {
+            var result = _rentalService.RentalCarControl(carId);
+            return Ok(result);
         }
     }
 }

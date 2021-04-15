@@ -21,6 +21,7 @@ import { BrandPipePipe } from './pipes/brand-pipe.pipe';
 import { ColorPipePipe } from './pipes/color-pipe.pipe'
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

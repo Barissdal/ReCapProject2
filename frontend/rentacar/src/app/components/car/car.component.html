@@ -25,36 +25,107 @@
     <img src="{{imageUrl}}{{image.imagePath}}" class="d-block w-100" width="800" height="400" alt="..." />
   </div>
 </div> -->
-<div class="row">
+<div class="row" >
   <div class="mb-3">
     <label for="filterText" class="form-label">Araba ara</label>
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz">
+    <input
+      type="text"
+      [(ngModel)]="filterText"
+      class="form-control"
+      id="filterText"
+      placeholder="arama ifadesi giriniz"
+    />
   </div>
-  <div *ngIf="filterText" class ="alert alert-success">
-    {{filterText}} aradınız
+  <div *ngIf="filterText" class="alert alert-success">
+    {{ filterText }} aradınız
   </div>
-  <div class="col-lg-4 col-md-6 col-sm-10 mb-3" *ngFor="let car of cars  | filterPipe:filterText "  >
-    <div  class="card" style="width: 100%;">
-        <img src="{{imageUrl}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi"
-        width="50" height="200">
-        <div class="card-body">
-          <h5
+  <div class="col-md-3">
+    <label for="colors">Renk seç:</label>
+    <select [(ngModel)]="colorFilter" class="form-select" aria-label="Default select example">
+      <option
+        *ngFor="let color of colors"
+        [value]="color.id"
+        [selected]="getSelectedColor(color.id)"
+      >
+        {{ color.name }}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label for="brands">Marka seç:</label>
+    <select [(ngModel)]="brandFilter" class="form-select" aria-label="Default select example">
+      <option
+        *ngFor="let brand of brands"
+        [value]="brand.id"
+        [selected]="getSelectedBrand(brand.id)"
+      >
+        {{ brand.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-3">
+    <br>
+    <div>
+      <button
+      *ngIf="colorFilter && brandFilter"
+      type="button"
+      class="btn btn-success"
+      routerLink="/cars/color/{{colorFilter}}/brand/{{brandFilter}}"
+    >
+      Filtrele
+    </button>
+    </div>
+
+  </div>
+  <br>
+  <div
+      class="col-lg-4 col-md-6 col-sm-10 mb-3"
+    *ngFor="let car of cars | filterPipe: filterText"
+  >
+    <div class="card" style="width: 100%">
+      <img
+        src="{{ imageUrl }}{{ car.imagePath }}"
+        class="card-img-top"
+        alt="Araba Resmi"
+        width="50"
+        height="200"
+      />
+      <div class="card-body">
+        <h5
           (click)="setCurrentCar(car)"
-          routerLink ="/cars/cardetail/{{car.carId}}"
-          class="card-title text-center">{{car.description | uppercase}}</h5>
-          <hr>
-          <p> <b>Marka :</b> {{car.brandName }} </p>
-          <!-- <hr>
+          routerLink="/cars/cardetail/{{ car.carId }}"
+          class="card-title text-center"
+        >
+          {{ car.description | uppercase }}
+        </h5>
+        <hr />
+        <p><b>Marka :</b> {{ car.brandName }}</p>
+        <!-- <hr>
           <p> <b>Model Yılı :</b> {{car.modelYear}} </p> -->
-          <hr>
-          <p> <b class="pull-left">Günlük Fiyatı :</b> {{car.dailyPrice|currency: "TRY":""}} ₺</p>
-          <!-- <hr>
+        <hr />
+        <p>
+          <b class="pull-left">Günlük Fiyatı :</b>
+          {{ car.dailyPrice | currency: "TRY":"" }} ₺
+        </p>
+        <!-- <hr>
           <p> <b>Renk :</b> {{car.colorName}} </p> -->
-          <hr>
-          <p> <b class="pull-left">Günlük Kdv Dahil Fiyatı :</b> {{car.dailyPrice| vatAdded:18 |currency: "TRY":""}} ₺</p>
-          <hr>
-          <p><button (click)="addToCart(car)" type="button" class="btn btn-success"> Araç Kirala</button></p>
-        </div>
+        <hr />
+        <p>
+          <b class="pull-left">Günlük Kdv Dahil Fiyatı :</b>
+          {{ car.dailyPrice | vatAdded: 18 | currency: "TRY":"" }} ₺
+        </p>
+        <hr />
+        <p>
+          <button
+            (click)="addToCart(car)"
+            type="button"
+            class="btn btn-success"
+          >
+            Araç Kirala
+          </button>
+        </p>
       </div>
     </div>
   </div>
+</div>

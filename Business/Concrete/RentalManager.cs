@@ -56,10 +56,31 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
         }
 
+        public IDataResult<Rental> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         [CacheAspect(duration: 10)]
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsByCar(int carId)
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(r=>r.CarId==carId));
+        }
+
+        public IResult RentalCarControl(int carId)
+        {
+            var result = _rentalDal.GetAll(r => r.CarId == carId).Any();
+            if (result)
+            {
+                return new ErrorResult("Araç teslim edilmedi");
+            }
+
+            return new SuccessResult();
         }
 
         [SecuredOperation("admin")]
