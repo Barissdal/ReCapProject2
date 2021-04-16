@@ -14,33 +14,67 @@
   <div class="col-lg-12">
     <div class="row">
       <div class="col-md-6">
-        <div class="search__componenet-from-group search__componenet-datapicker isCompleted">
+        <div
+          class="search__componenet-from-group search__componenet-datapicker isCompleted"
+        >
           <div class="control">
             <label>Alış Tarihi</label>
-            <div class="input" id="startDate">
-              <span class="date active" placeholder="Tarih">
+            <div class="input" id="startDate"></div>
+            <input
+              type="date"
+              min="{{ getRentMinDate() }}"
+              value="{{ getRentMinDate() }}"
+              [(ngModel)]="rentDate"
+              id="startDate-value"
 
-              </span>
-            </div>
-            <input type="date" id="startDate-value" value="2021-04-16T">
+            />
           </div>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="search__componenet-from-group search__componenet-datapicker isCompleted">
+        <div
+          class="search__componenet-from-group search__componenet-datapicker isCompleted"
+        >
           <div class="control">
             <label>İade Tarihi</label>
-            <div class="input" id="endDate">
-              <span class="date active" placeholder="Tarih">
+            <div class="input" id="endDate"></div>
+            <input
+              type="date"
+              min="{{ getReturnMinDate() }}"
+              value="{{ getReturnMinDate() }}"
+              [(ngModel)]="returnDate"
+              id="endDate-value"
 
-              </span>
-            </div>
-            <input type="date" id="endDate-value" value="2021-04-18T">
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  <div class="card-body" *ngFor="let car of cars">
+    <hr />
+    <p><b>Araba :</b> {{ car.description | uppercase }}</p>
+    <hr />
+    <p><b>Renk :</b> {{ car.colorName }}</p>
+    <hr />
+    <p>
+      <b class="pull-left">Günlük Fiyatı :</b>
+      {{ car.dailyPrice | currency: "TRY":"" }} ₺
+    </p>
+    <hr />
+    <p>
+      <b class="pull-left">Günlük Kdv Dahil Fiyatı :</b>
+      {{ car.dailyPrice | vatAdded: 18 | currency: "TRY":"" }} ₺
+    </p>
+    <hr />
+    <p><b>Alış Tarihi :</b> {{ rentDate }}</p>
+    <hr />
+    <p><b>İade Tarihi :</b> {{ returnDate }}</p>
+    <hr />
+    <p>
+      <button (click)="checkClick()" type="button" class="btn btn-success">
+        Araç Kirala
+      </button>
+    </p>
+  </div>
 </div>
-
