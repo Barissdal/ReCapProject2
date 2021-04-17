@@ -5,6 +5,7 @@ export interface Rental {
   brandName:string;
   colorName:string;
   dailyPrice:number;
+  customerId:number,
   customerFirstName:string;
   customerLastName:string;
   rentDate:Date;

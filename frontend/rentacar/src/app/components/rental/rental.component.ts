@@ -6,6 +6,7 @@ import { CarService } from 'src/app/services/car.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { ToastrService } from 'ngx-toastr';
 import { formatDate } from '@angular/common';
+import { Customer } from 'src/app/models/customer';
 
 @Component({
   selector: 'app-rental',
@@ -21,6 +22,9 @@ export class RentalComponent implements OnInit {
 
   cars:Car[]=[];
   isRentBefore:Boolean = false;
+
+  customers:Customer;
+  customerId:number;
 
 
   constructor(private rentalService:RentalService,
@@ -62,6 +66,9 @@ export class RentalComponent implements OnInit {
   getCarsDetail(carId:number){
     this.carService.getCarsDetail(carId).subscribe(response=>{
       this.cars = response.data
+      this.cars = response.data.filter(
+        (thing, i, arr) => arr.findIndex(t => t.carId === thing.carId) === i
+      )
       //console.log(response);
       //this.carId = carId;
     })

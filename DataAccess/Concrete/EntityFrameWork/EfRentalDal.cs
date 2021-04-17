@@ -29,6 +29,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                 CarName = cr.Description,
                                 BrandName = brd.Name,
                                 ColorName = col.Name,
+                                CustomerId = rnt.CustomerId,
                                 CustomerFirstName = usr.FirstName,
                                 CustomerLastName = usr.LastName,
                                 DailyPrice = cr.DailyPrice,
